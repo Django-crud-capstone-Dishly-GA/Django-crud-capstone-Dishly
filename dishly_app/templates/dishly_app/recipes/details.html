@@ -1,12 +1,8 @@
-{% extends "base.html" %}{% load static %}
+{% extends "base.html" %} {% load static %}
+
 
 {% block content %}
-<h1 class="text-center">Welcome to Dishly 🍳</h1>
 
-<p class="text-center">Your personal recipe collection app.</p>
-
- {% for recipe in object_list %}
-    
 <section class="recipe-showcase">
   <div class="showcase-container">
     <div class="showcase-image">
@@ -25,17 +21,11 @@
 
       <div class="actions">
         <button class="btn primary">❤️ Add to Favorites</button>
-      <a href="{% url "recipe-detail" recipe.id %}">  <button class="btn secondary">👁 View Full Recipe</button> </a>
+      <a href="{% url "recipe-detail" recipe.id %}">  <button class="btn secondary">Edit Recipe</button> </a>
+      <a href="{% url "recipe-delete" recipe.id %}">  <button class="btn secondary">Delete Recipe</button> </a>
       </div>
     </div>
   </div>
 </section>
 
-
- {% endfor %}
-
-{% endblock %}
-
-
-
-
+{% endblock content %}

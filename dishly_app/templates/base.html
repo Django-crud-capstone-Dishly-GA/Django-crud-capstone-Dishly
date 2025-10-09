@@ -1,0 +1,44 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block Title %}dishly{% endblock Title %}</title>
+  {% block extra_css %}
+  <link rel="stylesheet" href="{% static "css/base.css" %}">
+  {% endblock %}
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo"> <img class="logo" src="{% static "images/logo.png" %}" alt="DishlyLogo" /></div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">My Recipes</a></li>
+      <li><a href="#">Categories</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="nav-buttons">
+      <button class="btn login">Login</button>
+      <button class="btn signup">Sign Up</button>
+    </div>
+  </nav>
+
+  <main class="content">
+    {% block content %}
+    {% endblock content %}
+
+
+
+  </main>
+
+  <div>
+  <footer class="footer">
+    <p>© 2025 Dishly | Built by Hungry Team 😎🔥</p>
+  </footer>
+  </div>
+</body>
+</html>

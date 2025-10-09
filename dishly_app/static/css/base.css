@@ -1,0 +1,217 @@
+/* === GLOBAL === */
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #fff8f3, #ffe9d2);
+  color: #2b2b2b;
+}
+
+/* === NAVBAR === */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 15px 30px;
+  background: #fffdf8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #f5d0a9;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #d86b34;
+  object-fit:cover;
+  width: 100px;
+  height: auto;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #6e3a07;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #ff914d;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn.login {
+  background: #ffca7a;
+  color: #422000;
+}
+
+.btn.signup {
+  background: #ff914d;
+  color: white;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* === MAIN CONTENT === */
+.content {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+/* === FOOTER === */
+.footer {
+  text-align: center;
+  padding: 15px 0;
+  background: #fffdf8;
+  border-top: 2px solid #f5d0a9;
+  color: #777;
+  font-size: 0.9em;
+  position: relative; /* changed from fixed */
+  bottom: 0;
+  width: 100%;
+}
+
+/* === RECIPE SHOWCASE === */
+.recipe-showcase {
+  width: 90%;
+  max-width: 1000px;
+  margin: 60px auto;
+  background: #fffdf8;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  animation: fadeIn 0.7s ease-in;
+}
+
+.showcase-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.showcase-image img {
+  width: 100%;
+  max-width: 450px;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px 0 0 20px;
+}
+
+.showcase-content {
+  flex: 1;
+  padding: 30px;
+}
+
+.showcase-content h2 {
+  color: #d86b34;
+  font-size: 1.8em;
+  margin-top: 0;
+}
+
+.description {
+  font-size: 1em;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.ingredients {
+  background: #fff3e4;
+  border-left: 4px solid #ff914d;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.ingredients h4 {
+  margin: 0 0 8px;
+  color: #6e3a07;
+}
+
+.ingredients p {
+  margin: 0;
+  color: #444;
+  line-height: 1.4;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Reuse existing button classes */
+.btn.primary {
+  background: #ff914d;
+  color: #fff;
+}
+
+.btn.secondary {
+  background: #ffca7a;
+  color: #422000;
+}
+
+/* === ANIMATION === */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .showcase-container {
+    flex-direction: column;
+  }
+
+  .showcase-image img {
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .showcase-content {
+    padding: 20px;
+  }
+
+  .showcase-content h2 {
+    font-size: 1.5em;
+  }
+}
