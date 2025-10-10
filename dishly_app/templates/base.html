@@ -6,7 +6,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>{% block Title %}dishly{% endblock Title %}</title>
+  {% block head %}{% endblock head %}
   {% block extra_css %}
   <link rel="stylesheet" href="{% static "css/base.css" %}">
   {% endblock %}

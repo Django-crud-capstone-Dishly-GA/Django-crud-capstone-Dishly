@@ -22,7 +22,7 @@ body {
   font-size: 1.5em;
   font-weight: bold;
   color: #d86b34;
-  object-fit:cover;
+  object-fit: cover;
   width: 100px;
   height: auto;
 }
@@ -90,7 +90,8 @@ body {
   border-top: 2px solid #f5d0a9;
   color: #777;
   font-size: 0.9em;
-  position: relative; /* changed from fixed */
+  position: relative;
+  /* changed from fixed */
   bottom: 0;
   width: 100%;
 }
@@ -177,8 +178,15 @@ body {
 
 /* === ANIMATION === */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* === RESPONSIVE === */
@@ -214,4 +222,9 @@ body {
   .showcase-content h2 {
     font-size: 1.5em;
   }
+}
+
+.danger {
+  background-color: red !important;
+  color: white !important;
 }

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static "css/form.css" %}" />
+{% endblock head %}
+{% block content %}
+<section class="dishly-form-page">
+  <div class="dishly-form-card">
+    
+
+    {% if recipe %}
+    <h1 class="dishly-form-title">🍳 Edit {{ recipe.name }} </h1>
+    
+  {% else %}
+ 
+  <h1 class="dishly-form-title">🍳 Add a New Recipe</h1>
+  {% endif %}
+    <p class="dishly-form-subtitle">Share your favorite dish with the Hungry Team community!</p>
+
+
+    <form action="" method="post" class="dishly-form-container">
+      {% csrf_token %}
+      <table class="dishly-form-table">
+        {{ form.as_table }}
+      </table>
+
+      <button type="submit" class="dishly-btn dishly-submit-btn">Submit Recipe</button>
+    </form>
+  </div>
+</section>
+{% endblock content %}

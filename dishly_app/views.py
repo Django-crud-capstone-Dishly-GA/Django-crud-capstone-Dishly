@@ -23,12 +23,21 @@ class RecipeDetailView(DetailView):
 class RecipeCreateView(CreateView):
     model = Recipe
     fields = '__all__'
-    success_url = ""
+    template_name = 'dishly_app/recipes/recipe_create.html'
+    success_url = reverse_lazy("recipe-list")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+    # Now let's have the CreateView class do its normal job and take over
+        return super().form_valid(form)
+    
 
 
 class RecipeUpdateView(UpdateView):
     model = Recipe
-    template_name = 'dishly_app/recipes/details.html'
+    fields = '__all__'
+    template_name = 'dishly_app/recipes/recipe_create.html'
+    success_url = reverse_lazy("recipe-list") 
     context_object_name = 'recipe'
     
     
@@ -36,5 +45,5 @@ class RecipeUpdateView(UpdateView):
 class RecipeDeleteView(DeleteView):
     model = Recipe
     template_name = 'dishly_app/recipes/recipe_confirm_delete.html'
-    success_url = ''
+    success_url = reverse_lazy("recipe-list") 
     context_object_name = 'recipe'

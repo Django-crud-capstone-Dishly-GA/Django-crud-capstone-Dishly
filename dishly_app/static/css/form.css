@@ -1,0 +1,100 @@
+.dishly-form-page {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #fff8f3, #ffe9d2);
+    padding: 40px 20px;
+}
+
+/* === FORM CARD === */
+.dishly-form-card {
+    background: #fffdf8;
+    border: 2px solid #f5d0a9;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 550px;
+    padding: 40px 35px;
+    animation: dishlyFadeIn 0.7s ease;
+}
+
+.dishly-form-title {
+    color: #d86b34;
+    font-size: 1.9em;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.dishly-form-subtitle {
+    color: #6e3a07;
+    text-align: center;
+    font-size: 1em;
+    margin-bottom: 25px;
+}
+
+/* === FORM === */
+.dishly-form-container {
+    width: 100%;
+}
+
+.dishly-form-table {
+    width: 100%;
+    border-spacing: 0 15px;
+}
+
+.dishly-form-table th {
+    text-align: left;
+    color: #6e3a07;
+    font-weight: 600;
+    padding-right: 10px;
+    vertical-align: top;
+    font-size: 0.95em;
+}
+
+.dishly-form-table td {
+    width: 100%;
+}
+
+.dishly-form-table input,
+.dishly-form-table select,
+.dishly-form-table textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #f0cda7;
+    background: #ffffff;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 1em;
+    color: #2b2b2b;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.dishly-form-table input:focus,
+.dishly-form-table select:focus,
+.dishly-form-table textarea:focus {
+    border-color: #ff914d;
+    box-shadow: 0 0 0 3px rgba(255, 145, 77, 0.2);
+    outline: none;
+}
+
+/* === SUBMIT BUTTON === */
+.dishly-btn.dishly-submit-btn {
+    display: block;
+    margin: 25px auto 0;
+    padding: 12px 28px;
+    font-weight: 600;
+    font-size: 1em;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: #ff914d;
+    color: white;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.dishly-btn.dishly-submit-btn:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}

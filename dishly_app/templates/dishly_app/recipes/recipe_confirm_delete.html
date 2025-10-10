@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% load static %}
+
+{% block content %}
+<h2>{% if object %}Edit{% else %}Add{% endif %} Recipe</h2>
+
+<h1>Delete Recipe</h1>
+<p> Are you sure you want to delete the recipe <b>{{ recipe.name }} ?</b></p>
+
+<form action="" method="post" class="form">
+{% csrf_token %}
+<button type="submit" class="btn danger">Yes - Delete!</button>
+<a href="{% url "recipe-list" %}" class="btn secondary">Cancel</a>
+
+  
+{% comment %} <a href="{% url "recipe-list" %}">  <button type="submit" class="btn secondary danger">Yes</button> </a>
+    <button type="submit" class="btn secondary">No</button> </a> {% endcomment %}
+</form>
+{% endblock content %}
