@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock head %}
+
+{% block content %}
+<section class="about-hero">
+  <div class="about-container">
+    <h1 class="about-title">About Dishly </h1>
+    <p class="about-subtitle">
+      We’re not just building websites and projects  we’re cooking up greatness.<br>
+      Because we’re <strong>Hungry to be the Best</strong>  and second place isn’t on the menu. 
+    </p>
+  </div>
+</section>
+
+<section class="about-mission">
+  <div class="about-container">
+    <h2>Our Mission</h2>
+    <p>
+      At <strong>Dishly</strong>, our mission is to make cooking more connected, creative, and fun.
+      We believe every recipe tells a story  and we’re here to help people share those stories with the world.
+      From home cooks to culinary artists, we empower users to create, discover, and perfect their dishes effortlessly.
+    </p>
+
+    <h2>Our Vision</h2>
+    <p>
+      To become the most inspiring recipe platform in the region  a place where technology meets flavor,
+      and passion for food becomes a digital experience that connects hearts and kitchens across the globe.
+    </p>
+  </div>
+</section>
+
+<section class="about-team">
+  <div class="about-container">
+    <h2>Meet the Hungry Team </h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="avatar"></div>
+        <h3>Abdulrhman Yaghi</h3>
+       
+      </div>
+      <div class="team-card">
+        <div class="avatar"></div>
+        <h3>Abdelrazzaq Asfour</h3>
+        
+      </div>
+      <div class="team-card">
+        <div class="avatar"></div>
+        <h3>Abdullah Faouri</h3>
+        
+      </div>
+      <div class="team-card">
+        <div class="avatar"></div>
+        <h3>Alaa AlTaher</h3>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-footer">
+  <div class="about-container">
+    <h2>Join Our Journey </h2>
+    <p>
+      Dishly started as a small idea shared among passionate developers at
+      General Assembly’s Software Engineering program  and we’re growing fast!<br><br>
+      Whether you’re a foodie, a developer, or a dreamer you can be part of the Dishly experience.
+      Together, let’s cook up the future of recipe sharing.
+    </p>
+  </div>
+</section>
+{% endblock content %}

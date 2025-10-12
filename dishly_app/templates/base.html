@@ -1,46 +1,61 @@
 {% load static %}
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>{% block Title %}dishly{% endblock Title %}</title>
+  <title>{% block Title %}Dishly{% endblock Title %}</title>
+  
   {% block head %}{% endblock head %}
   {% block extra_css %}
-  <link rel="stylesheet" href="{% static "css/base.css" %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
   {% endblock %}
 </head>
 <body>
+    
   <nav class="navbar">
-    <div class="logo"> <img class="logo" src="{% static "images/logo.png" %}" alt="DishlyLogo" /></div>
+    <div class="logo">
+      <img class="logo" src="{% static 'images/logo.png' %}" alt="DishlyLogo" />
+    </div>
+   
     <ul class="nav-links">
       <li><a href="#">Home</a></li>
-      <li><a href="#">My Recipes</a></li>
-      <li><a href="#">Categories</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
+      {% if user.is_authenticated %}
+      
+        <li><a href="#">My Recipes</a></li>
+        <li><a href="#">Favorites</a></li>
+       
+     
+     
+      {% endif %}
+        
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
     </ul>
+
     <div class="nav-buttons">
-      <button class="btn login">Login</button>
-      <button class="btn signup">Sign Up</button>
+      {% if user.is_authenticated %}
+      <span>Hello, {{ request.user.username }}</span>
+        <form id="logout-form" method="post" action="{% url "logout" %}">
+              {% csrf_token %}
+        <a href="#"><button class="btn signup">Logout</button></a>
+        </form>
+      {% else %}
+        <a href="{% url 'login' %}"><button class="btn login">Login</button></a>
+        <a href="{% url 'signup' %}"><button class="btn signup">Sign Up</button></a>
+      {% endif %}
     </div>
   </nav>
 
   <main class="content">
     {% block content %}
     {% endblock content %}
-
-
-
   </main>
 
-  <div>
   <footer class="footer">
     <p>© 2025 Dishly | Built by Hungry Team 😎🔥</p>
   </footer>
-  </div>
+
 </body>
 </html>

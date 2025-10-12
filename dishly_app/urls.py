@@ -1,5 +1,5 @@
-from django.urls import path
-
+from django.urls import path, include
+from django.contrib import admin
 from . import views
 from .views import *
 
@@ -11,4 +11,9 @@ urlpatterns = [
     path('recipes/new/', RecipeCreateView.as_view(), name= 'recipe-create'),
     path('recipes/<int:pk>/delete', RecipeDeleteView.as_view(), name='recipe-delete'),
     path('recipes/<int:pk>/update', RecipeUpdateView.as_view(), name= 'recipe-update'),
+    path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
+
+    path('signup/',views.signup, name='signup'), 
+    
 ]

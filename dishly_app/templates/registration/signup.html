@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+{% endblock head %}
+
+{% block content %}
+<section class="dishly-register-page">
+  <div class="dishly-register-card">
+    <h1 class="dishly-register-title">👨‍🍳 Register with Dishly</h1>
+    <p class="dishly-register-subtitle">
+      Become part of the Dishly creator community — share your recipes, inspire others, and cook up greatness! 🍴🔥
+    </p>
+
+    {# --- NON-FIELD ERRORS (e.g. password mismatch) --- #}
+    {% if form.non_field_errors %}
+      <div class="dishly-form-errors">
+        {% for error in form.non_field_errors %}
+          <p>{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <form method="post" class="dishly-register-form">
+      {% csrf_token %}
+
+      {# --- FIELD LOOP WITH ERROR DISPLAY --- #}
+      {% for field in form %}
+        <div class="dishly-form-field">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <ul class="dishly-errorlist">
+              {% for error in field.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      {% endfor %}
+
+      <button type="submit" class="dishly-btn dishly-register-btn">Register</button>
+    </form>
+
+    <p class="dishly-register-footer">
+      Already have an account? <a href="{% url 'login' %}">Login here</a>
+    </p>
+  </div>
+</section>
+{% endblock content %}

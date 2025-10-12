@@ -1,0 +1,162 @@
+/* === GENERAL === */
+.contact-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
+/* === HERO === */
+.contact-hero {
+  background: linear-gradient(135deg, #fff8f3, #ffe9d2);
+  padding: 100px 20px 60px;
+  text-align: center;
+}
+
+.contact-title {
+  color: #d86b34;
+  font-size: 2.3em;
+  margin-bottom: 15px;
+}
+
+.contact-subtitle {
+  color: #6e3a07;
+  font-size: 1.1em;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* === BODY === */
+.contact-body {
+  background: #fffdf8;
+  padding: 70px 20px;
+  border-top: 2px solid #f5d0a9;
+  border-bottom: 2px solid #f5d0a9;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+  align-items: start;
+}
+
+/* === CONTACT INFO === */
+.contact-info h2 {
+  color: #d86b34;
+  margin-bottom: 15px;
+  font-size: 1.6em;
+}
+
+.contact-info p {
+  color: #444;
+  line-height: 1.6;
+  font-size: 1.05em;
+}
+
+.contact-info a {
+  color: #ff914d;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+/* === SOCIAL ICONS === */
+.social-icons {
+  margin-top: 15px;
+  display: flex;
+  gap: 12px;
+}
+
+.social-icons img {
+  width: 28px;
+  height: 28px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+  opacity: 0.85;
+}
+
+/* === FORM === */
+.contact-form h2 {
+  color: #d86b34;
+  margin-bottom: 20px;
+  font-size: 1.6em;
+}
+
+.dishly-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.dishly-contact-form input,
+.dishly-contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #f0cda7;
+  background: #fff;
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 1em;
+  color: #2b2b2b;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.dishly-contact-form input:focus,
+.dishly-contact-form textarea:focus {
+  border-color: #ff914d;
+  box-shadow: 0 0 0 3px rgba(255, 145, 77, 0.2);
+  outline: none;
+}
+
+/* === BUTTON === */
+.dishly-btn.dishly-submit-btn {
+  background: #ff914d;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.dishly-btn.dishly-submit-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* === FOOTER === */
+.contact-footer {
+  background: linear-gradient(135deg, #ffe9d2, #fff8f3);
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.contact-footer p {
+  color: #6e3a07;
+  font-size: 1.05em;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 700px) {
+  .contact-title {
+    font-size: 2em;
+  }
+  .contact-subtitle {
+    font-size: 1em;
+  }
+  .contact-grid {
+    gap: 20px;
+  }
+}

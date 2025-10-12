@@ -1,0 +1,139 @@
+/* === ABOUT PAGE BASE === */
+.about-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
+/* === HERO === */
+.about-hero {
+  background: linear-gradient(135deg, #fff8f3, #ffe9d2);
+  padding: 100px 20px 60px;
+  color: #2b2b2b;
+}
+
+.about-title {
+  font-size: 2.4em;
+  color: #d86b34;
+  margin-bottom: 15px;
+}
+
+.about-subtitle {
+  font-size: 1.2em;
+  color: #6e3a07;
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* === MISSION / VISION === */
+.about-mission {
+  background: #fffdf8;
+  padding: 70px 20px;
+  border-top: 2px solid #f5d0a9;
+  border-bottom: 2px solid #f5d0a9;
+}
+
+.about-mission h2 {
+  color: #d86b34;
+  margin-bottom: 15px;
+  font-size: 1.7em;
+}
+
+.about-mission p {
+  color: #444;
+  line-height: 1.7;
+  max-width: 850px;
+  margin: 0 auto 30px;
+  font-size: 1.05em;
+}
+
+/* === TEAM === */
+.about-team {
+  background: linear-gradient(135deg, #ffe9d2, #fff3e4);
+  padding: 80px 20px;
+}
+
+.about-team h2 {
+  color: #d86b34;
+  font-size: 1.9em;
+  margin-bottom: 40px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  justify-items: center;
+}
+
+.team-card {
+  background: #fff;
+  border: 2px solid #f5d0a9;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  padding: 30px 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  max-width: 250px;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.avatar {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.team-card h3 {
+  color: #d86b34;
+  margin-bottom: 5px;
+  font-size: 1.2em;
+}
+
+.team-card p {
+  color: #6e3a07;
+  font-size: 0.95em;
+  margin: 0;
+}
+
+/* === JOIN SECTION === */
+.about-footer {
+  background: #fffdf8;
+  padding: 80px 20px;
+}
+
+.about-footer h2 {
+  color: #d86b34;
+  font-size: 1.9em;
+  margin-bottom: 20px;
+}
+
+.about-footer p {
+  color: #444;
+  line-height: 1.7;
+  font-size: 1.05em;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 700px) {
+  .about-title {
+    font-size: 2em;
+  }
+  .about-subtitle {
+    font-size: 1em;
+  }
+  .team-grid {
+    gap: 20px;
+  }
+  .team-card {
+    max-width: 100%;
+  }
+}

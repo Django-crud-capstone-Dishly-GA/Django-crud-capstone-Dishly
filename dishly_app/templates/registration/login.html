@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock head %}
+
+{% block content %}
+<section class="dishly-login-page">
+  <div class="dishly-login-card">
+    <h1 class="dishly-login-title">👋 Welcome Back to Dishly</h1>
+    <p class="dishly-login-subtitle">
+      Login to access your recipes and continue cooking up greatness! 🍽️
+    </p>
+
+    <form method="post" class="dishly-login-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+    <input type="hidden" name="next" value="{{ next }}" />
+      <button type="submit" class="dishly-btn dishly-login-btn">Login</button>
+    </form>
+
+    {% comment %} <p class="dishly-login-footer">
+      Don’t have an account? <a href="{% url 'register' %}">Sign Up</a>
+    </p> {% endcomment %}
+
+  </div>
+</section>
+{% endblock content %}

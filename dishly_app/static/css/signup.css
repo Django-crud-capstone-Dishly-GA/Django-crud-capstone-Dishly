@@ -1,0 +1,159 @@
+/* === PAGE LAYOUT === */
+.dishly-register-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #fff8f3, #ffe9d2);
+  font-family: 'Poppins', Arial, sans-serif;
+  padding: 40px 20px;
+}
+
+/* === CARD === */
+.dishly-register-card {
+  background: #fffdf8;
+  border: 2px solid #f5d0a9;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 500px;
+  padding: 45px 35px;
+  text-align: center;
+  animation: fadeIn 0.7s ease;
+}
+
+.dishly-register-title {
+  color: #d86b34;
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.dishly-register-subtitle {
+  color: #6e3a07;
+  font-size: 1em;
+  margin-bottom: 25px;
+}
+
+/* === FORM === */
+.dishly-register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: left;
+}
+
+/* === FIELD === */
+.dishly-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.dishly-form-field label {
+  font-weight: 600;
+  color: #6e3a07;
+  font-size: 0.95em;
+}
+
+.dishly-form-field input,
+.dishly-form-field select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #f0cda7;
+  background: #fff;
+  font-family: inherit;
+  font-size: 1em;
+  color: #2b2b2b;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.dishly-form-field input:focus,
+.dishly-form-field select:focus {
+  border-color: #ff914d;
+  box-shadow: 0 0 0 3px rgba(255, 145, 77, 0.2);
+  outline: none;
+}
+
+/* === BUTTON === */
+.dishly-btn.dishly-register-btn {
+  background: #ff914d;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  margin-top: 10px;
+}
+
+.dishly-btn.dishly-register-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* === ERROR STYLES === */
+.dishly-form-errors {
+  background: #ffe5e5;
+  border: 1px solid #ff4d4d;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 15px;
+  color: #b20000;
+  text-align: left;
+  font-size: 0.95em;
+}
+
+.dishly-errorlist {
+  list-style: none;
+  margin: 5px 0 0;
+  padding-left: 0;
+}
+
+.dishly-errorlist li {
+  color: #d60000;
+  font-size: 0.9em;
+}
+
+/* === ERROR FIELD BORDER === */
+.dishly-form-field input.is-invalid,
+.dishly-form-field select.is-invalid {
+  border-color: #ff4d4d !important;
+  box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.2);
+}
+
+/* === FOOTER === */
+.dishly-register-footer {
+  margin-top: 25px;
+  color: #444;
+  font-size: 0.95em;
+}
+
+.dishly-register-footer a {
+  color: #ff914d;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.dishly-register-footer a:hover {
+  text-decoration: underline;
+}
+
+/* === ANIMATION === */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 500px) {
+  .dishly-register-card {
+    padding: 30px 20px;
+  }
+
+  .dishly-register-title {
+    font-size: 1.7em;
+  }
+}

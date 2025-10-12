@@ -1,0 +1,120 @@
+/* === PAGE LAYOUT === */
+.dishly-login-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #fff8f3, #ffe9d2);
+  font-family: 'Poppins', Arial, sans-serif;
+  padding: 40px 20px;
+}
+
+/* === CARD === */
+.dishly-login-card {
+  background: #fffdf8;
+  border: 2px solid #f5d0a9;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 420px;
+  padding: 40px 35px;
+  text-align: center;
+  animation: fadeIn 0.7s ease;
+}
+
+.dishly-login-title {
+  color: #d86b34;
+  font-size: 1.9em;
+  margin-bottom: 10px;
+}
+
+.dishly-login-subtitle {
+  color: #6e3a07;
+  font-size: 1em;
+  margin-bottom: 25px;
+}
+
+/* === FORM === */
+.dishly-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: left;
+}
+
+.dishly-login-form label {
+  font-weight: 600;
+  color: #6e3a07;
+  font-size: 0.95em;
+  margin-bottom: 5px;
+}
+
+.dishly-login-form input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #f0cda7;
+  background: #fff;
+  font-family: inherit;
+  font-size: 1em;
+  color: #2b2b2b;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.dishly-login-form input:focus {
+  border-color: #ff914d;
+  box-shadow: 0 0 0 3px rgba(255, 145, 77, 0.2);
+  outline: none;
+}
+
+/* === BUTTON === */
+.dishly-btn.dishly-login-btn {
+  background: #ff914d;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.dishly-btn.dishly-login-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* === FOOTER === */
+.dishly-login-footer {
+  margin-top: 25px;
+  color: #444;
+  font-size: 0.95em;
+}
+
+.dishly-login-footer a {
+  color: #ff914d;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.dishly-login-footer a:hover {
+  text-decoration: underline;
+}
+
+/* === ANIMATION === */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 500px) {
+  .dishly-login-card {
+    padding: 30px 20px;
+  }
+
+  .dishly-login-title {
+    font-size: 1.6em;
+  }
+}
