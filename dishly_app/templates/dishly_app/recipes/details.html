@@ -15,15 +15,27 @@
       </p>
 
       <div class="ingredients">
-        <h4>Ingredients:</h4>
-            <p>{{recipe.ingeredients}}</p>
+        <h4>ingredients:</h4>
+         {% for ingredient in recipe.ingredients.all %}
+              <p>{{ ingredient.name }}</p>
+           {% empty %}
+              <li>No ingredients listed.</li>
+              {% endfor %}
+
       </div>
 
+
       <div class="actions">
+      {% if not user.is_authenticated  %}
+        <h4>Login</h4>
+      {% elif user.is_authenticated and recipe.user == user %}
+           <button class="btn primary">❤️ Add to Favorites</button>
+          <a href="{% url "recipe-update" recipe.id %}">  <button class="btn secondary">Edit Recipe</button> </a>
+          <a href="{% url "recipe-delete" recipe.id %}">  <button class="btn secondary">Delete Recipe</button> </a>
+      {% else %}
         <button class="btn primary">❤️ Add to Favorites</button>
-      <a href="{% url "recipe-update" recipe.id %}">  <button class="btn secondary">Edit Recipe</button> </a>
-      <a href="{% url "recipe-delete" recipe.id %}">  <button class="btn secondary">Delete Recipe</button> </a>
-      </div>
+      {% endif %}
+       </div>
     </div>
   </div>
 </section>

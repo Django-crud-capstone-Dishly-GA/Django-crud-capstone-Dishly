@@ -1,50 +1,43 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends "base.html" %}{% load static %}
 
-{% block head %}
-<link rel="stylesheet" href="{% static "css/form.css" %}" />
-{% endblock head %}
 
 {% block content %}
-<section class="dishly-form-page">
-  <div class="dishly-form-card">
-    {% if recipe %}
-      <h1 class="dishly-form-title">🍳 Edit {{ recipe.name }}</h1>
-    {% else %}
-      <h1 class="dishly-form-title">🍳 Add a New Recipe</h1>
-    {% endif %}
-    <p class="dishly-form-subtitle">Share your favorite dish with the Hungry Team community!</p>
+ {% for recipe in recipes %}
+    
+<section class="recipe-showcase">
+  <div class="showcase-container">
+    <div class="showcase-image">
+      <img src="https://www.seriouseats.com/thmb/EgBZ3JxNFUZAd4rMLcZWzGZqaaE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20221208-Mansaf-Mai-Kakish-hero-ec9c515c00d24b5c9ef567854036f044.JPG" alt="Spaghetti Bolognese">
+    </div>
+    <div class="showcase-content">
+      <h2>{{recipe.name}} - By {{recipe.user.username}}</h2>
+      <p class="description">
+       {{recipe.description}}
+      </p>
 
-    <form action="" method="post" class="dishly-form-container">
-      {% csrf_token %}
-      <table class="dishly-form-table">
-        <tr>
-          <th>Name:</th>
-          <td>{{ form.name }}</td>
-        </tr>
-        <tr>
-          <th>Description:</th>
-          <td>{{ form.description }}</td>
-        </tr>
-        <tr>
-          <th>Category:</th>
-          <td>{{ form.category }}</td>
-        </tr>
-        <tr>
-          <th>Ingredients:</th>
-          <td>
-            <input type="text" id="ingredient-search" class="dishly-search-input" placeholder="🔍 Search ingredients...">
-            <div class="dishly-checkbox-list">
-              {{ form.ingredients }}
-            </div>
-          </td>
-        </tr>
-      </table>
+      <div class="ingredients">
+        <h4>ingredients:</h4>
+         {% for ingredient in recipe.ingredients.all %}
+              <p>{{ ingredient.name }}</p>
+           {% empty %}
+              <li>No ingredients listed.</li>
+              {% endfor %}
 
-      <button type="submit" class="dishly-btn dishly-submit-btn">Submit Recipe</button>
-    </form>
+
+     {% if user.is_authenticated %}
+      <div class="actions">
+        <button class="btn primary">❤️ Add to Favorites</button>
+      <a href="{% url "recipe-update" recipe.id %}">  <button class="btn secondary">Edit Recipe</button> </a>
+      <a href="{% url "recipe-delete" recipe.id %}">  <button class="btn secondary">Delete Recipe</button> </a>
+      </div>
+       {% else %}
+        <h4>Login to see the Edit/Delete</h4>
+      {% endif %}
   </div>
 </section>
+
+
+ {% endfor %}
 
 {% block extra_js %}
 <script>
@@ -87,6 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 {% endblock %}
-{% endblock content %}
 
 
+ {% endblock %}

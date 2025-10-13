@@ -15,5 +15,6 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
 
     path('signup/',views.signup, name='signup'), 
-    
+    path('myrecipe/',views.my_recipes, name='myrecipe'), 
+
 ]

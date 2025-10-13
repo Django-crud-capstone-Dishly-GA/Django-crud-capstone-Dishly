@@ -1,46 +1,124 @@
-{% extends "base.html" %}{% load static %}
+{% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
-<h1 class="text-center">Welcome to Dishly 🍳</h1>
-{% if user.is_authenticated %}
-<a href="{% url 'recipe-create' %}"> <button class="btn primary">Create a Recipe</button></a>
-{% else %}
-<h2>  Login to Create a Recipe </h2>
-   {% endif %}
-<p class="text-center">Your personal recipe collection app.</p>
+<h1 class="text-center page-title">Welcome to Dishly 🍳</h1>
 
- {% for recipe in object_list %}
-    
+{% if user.is_authenticated %}
+  <div class="create-btn-wrapper">
+    <a href="{% url 'recipe-create' %}">
+      <button class="btn primary">➕ Create a Recipe</button>
+    </a>
+  </div>
+{% else %}
+  <h2 class="text-center login-message">Login to Create a Recipe</h2>
+{% endif %}
+
+<p class="text-center tagline">Your personal recipe collection app.</p>
+
+<!-- === SEARCH BAR === -->
+<form class="search-bar" method="GET" action="{% url 'recipe-list' %}">
+  <input class="search-input" type="search" name="search" placeholder="Search recipes... 🔍">
+
+  
+</form>
+
+{% if all_search_results %}
+  <h2 class="section-title">🔎 Search Results</h2>
+  {% for result in all_search_results %}
+  <section class="recipe-showcase">
+    <div class="showcase-container">
+      <div class="showcase-image">
+        <img src="https://www.seriouseats.com/thmb/EgBZ3JxNFUZAd4rMLcZWzGZqaaE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20221208-Mansaf-Mai-Kakish-hero-ec9c515c00d24b5c9ef567854036f044.JPG" alt="{{ result.name }}">
+      </div>
+      <div class="showcase-content">
+        <h2>{{ result.name }} - By {{ result.user.username }}</h2>
+        <p class="description">{{ result.description }}</p>
+
+        <div class="ingredients">
+          <h4>Ingredients:</h4>
+          {% for ingredient in result.ingredients.all %}
+            <p>{{ ingredient.name }}</p>
+          {% empty %}
+            <li>No ingredients listed.</li>
+          {% endfor %}
+        </div>
+
+        <div class="recipe-actions">
+          <button class="btn primary">❤️ Add to Favorites</button>
+          <a href="{% url 'recipe-detail' result.id %}">
+            <button class="btn secondary">👁 View Full Recipe</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endfor %}
+
+{% endif %}
+
+<hr class="divider">
+
+<h2 class="section-title">🍽️ All Recipes</h2>
+
+{% for recipe in object_list %}
 <section class="recipe-showcase">
   <div class="showcase-container">
     <div class="showcase-image">
-      <img src="https://www.seriouseats.com/thmb/EgBZ3JxNFUZAd4rMLcZWzGZqaaE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20221208-Mansaf-Mai-Kakish-hero-ec9c515c00d24b5c9ef567854036f044.JPG" alt="Spaghetti Bolognese">
+      <img src="https://www.seriouseats.com/thmb/EgBZ3JxNFUZAd4rMLcZWzGZqaaE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20221208-Mansaf-Mai-Kakish-hero-ec9c515c00d24b5c9ef567854036f044.JPG" alt="{{ recipe.name }}">
     </div>
     <div class="showcase-content">
-      <h2>{{recipe.name}}</h2>
-      <p class="description">
-       {{recipe.description}}
-      </p>
+      <h2>{{ recipe.name }} - By {{ recipe.user.username }}</h2>
+      <p class="description">{{ recipe.description }}</p>
 
       <div class="ingredients">
         <h4>Ingredients:</h4>
-            <p>{{recipe.ingeredients}}</p>
+        {% for ingredient in recipe.ingredients.all %}
+          <p>{{ ingredient.name }}</p>
+        {% empty %}
+          <li>No ingredients listed.</li>
+        {% endfor %}
       </div>
 
-      <div class="actions">
+      <div class="recipe-actions">
         <button class="btn primary">❤️ Add to Favorites</button>
-      <a href="{% url "recipe-detail" recipe.id %}">  <button class="btn secondary">👁 View Full Recipe</button> </a>
+        <a href="{% url 'recipe-detail' recipe.id %}">
+          <button class="btn secondary">👁 View Full Recipe</button>
+        </a>
       </div>
     </div>
   </div>
 </section>
+{% endfor %}
 
 
- {% endfor %}
+<script>
+  // we added this script to make the search bar interactive and more fun to use
+const searchInput = document.querySelector('.search-input');
+const searchForm = document.querySelector('.search-bar');
+const recipeSections = document.querySelectorAll('.recipe-showcase');
+const noResultsMsg = document.querySelector('.no-results-msg');
 
+
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase().trim();
+
+  recipeSections.forEach(section => {
+    const title = section.querySelector('h2').textContent.toLowerCase();
+    section.style.display = title.includes(query) || query === "" ? "" : "none";
+  });
+});
+
+
+searchForm.addEventListener('submit', (e) => {
+  if (!searchInput.value.trim()) {
+    e.preventDefault();
+    return;
+  }
+
+  const anyVisible = [...recipeSections].some(s => s.style.display !== 'none');
+
+});
+</script>
 {% endblock %}
-
-
-
-

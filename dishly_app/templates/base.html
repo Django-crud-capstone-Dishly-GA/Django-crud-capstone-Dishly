@@ -20,10 +20,10 @@
     </div>
    
     <ul class="nav-links">
-      <li><a href="#">Home</a></li>
+      <li><a href="{% url "recipe-list" %}">Home</a></li>
       {% if user.is_authenticated %}
       
-        <li><a href="#">My Recipes</a></li>
+        <li><a href="{% url "myrecipe" %}">My Recipes</a></li>
         <li><a href="#">Favorites</a></li>
        
      
@@ -36,7 +36,7 @@
 
     <div class="nav-buttons">
       {% if user.is_authenticated %}
-      <span>Hello, {{ request.user.username }}</span>
+      <span class = "usernameWelcome"> <b><strong>Hello {{ request.user.username }}</strong></b></span>
         <form id="logout-form" method="post" action="{% url "logout" %}">
               {% csrf_token %}
         <a href="#"><button class="btn signup">Logout</button></a>
