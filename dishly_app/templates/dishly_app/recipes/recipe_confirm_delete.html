@@ -6,7 +6,7 @@
 <h1>Delete Recipe</h1>
 <p> Are you sure you want to delete the recipe <b>{{ recipe.name }} ?</b></p>
 
-<form action="{% url 'recipe_delete' object.pk %}" method="post" class="form">
+<form action="{% url 'recipe-delete' recipe.pk %}" method="post" class="form">
 {% csrf_token %}
 <button type="submit" class="btn danger">Yes - Delete!</button>
 <a href="{% url "recipe-list" %}" class="btn secondary">Cancel</a>

@@ -16,5 +16,6 @@ urlpatterns = [
 
     path('signup/',views.signup, name='signup'), 
     path('myrecipe/',views.my_recipes, name='myrecipe'), 
-
+    path('recipes/<int:recipe_id>/like/', views.like_recipe, name='like-recipe'),
+    
 ]

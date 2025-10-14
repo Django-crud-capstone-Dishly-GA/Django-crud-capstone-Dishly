@@ -27,6 +27,10 @@ class Recipe(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
+    image_url = models.URLField(blank =True, max_length=500,  help_text="Paste a full recipe image https://URL")
+
+    # Users who liked this recipe
+    likes = models.ManyToManyField(User, related_name='liked_recipes', blank=True)
 
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -36,6 +40,12 @@ class Recipe(models.Model):
         default=CATEGORIES[0][0]
     )
     ingredients = models.ManyToManyField(Ingredient, related_name="recipes")
+    
+    def total_likes(self):
+        return self.likes.count()
+    
+    def __str__(self):
+        return self.name
 
     def __str__(self):
         return self.name

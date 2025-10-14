@@ -1,16 +1,19 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from .models import Recipe
-from .forms import RecipeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from .models import Recipe
+from .forms import RecipeForm
 
 
-
+# ===============================
+# STATIC PAGES
+# ===============================
 class Home(LoginView):
     template_name = ''
 
@@ -18,24 +21,27 @@ class Home(LoginView):
 def about(request):
     return render(request, 'about.html')
 
+
 def contact(request):
     return render(request, 'contact.html')
 
+
+# ===============================
+# MAIN RECIPE VIEWS
+# ===============================
 class RecipleListView(ListView):
     model = Recipe
     template_name = 'dishly_app/home.html'
     context_object_name = 'object_list'
 
-def get_context_data(self, **kwargs):
-    context = super().get_context_data(**kwargs)
-    query = self.request.GET.get('search')
-
-    if query and query.strip():  # ✅ Only run search if text exists
-        context['all_search_results'] = Recipe.objects.filter(name__icontains=query)
-    else:
-        context['all_search_results'] = None  # ✅ Nothing will show in template
-
-    return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('search', '')
+        if query.strip():
+            context['all_search_results'] = Recipe.objects.filter(name__icontains=query)
+        else:
+            context['all_search_results'] = None
+        return context
 
 
 class RecipeDetailView(DetailView):
@@ -43,7 +49,8 @@ class RecipeDetailView(DetailView):
     template_name = 'dishly_app/recipes/details.html'
     context_object_name = 'recipe'
 
-class RecipeCreateView(LoginRequiredMixin,CreateView):
+
+class RecipeCreateView(LoginRequiredMixin, CreateView):
     model = Recipe
     form_class = RecipeForm
     template_name = 'dishly_app/recipes/recipe_create.html'
@@ -52,43 +59,73 @@ class RecipeCreateView(LoginRequiredMixin,CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-    
+
     def handle_no_permission(self):
         return redirect('/')
-        
-class RecipeUpdateView(LoginRequiredMixin,UpdateView):
+
+
+class RecipeUpdateView(LoginRequiredMixin, UpdateView):
     model = Recipe
     form_class = RecipeForm
     template_name = 'dishly_app/recipes/recipe_create.html'
     success_url = reverse_lazy("recipe-list")
     context_object_name = 'recipe'
+
     def handle_no_permission(self):
         return redirect('/')
 
-class RecipeDeleteView(LoginRequiredMixin,DeleteView):
+
+class RecipeDeleteView(LoginRequiredMixin, DeleteView):
     model = Recipe
     template_name = 'dishly_app/recipes/recipe_confirm_delete.html'
     success_url = reverse_lazy("recipe-list")
-    
-
     context_object_name = 'recipe'
+
     def handle_no_permission(self):
         return redirect('/')
-    
-    
-    
-    
 
-    
 
+# ===============================
+# USER RECIPES
+# ===============================
 @login_required(login_url=reverse_lazy('recipe-list'), redirect_field_name=None)
 def my_recipes(request):
     recipes = Recipe.objects.filter(user=request.user)
     return render(request, 'dishly_app/myrecipe.html', {'recipes': recipes})
 
 
-# Auth
+# ===============================
+# LIKE SYSTEM (AJAX)
+# ===============================
+@login_required
+def like_recipe(request, recipe_id):
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    liked = False
 
+    # Toggle like/unlike
+    if request.user in recipe.likes.all():
+        recipe.likes.remove(request.user)
+    else:
+        recipe.likes.add(request.user)
+        liked = True
+
+    # ✅ Detect AJAX requests (modern browsers)
+    if (
+        request.headers.get('x-requested-with') == 'XMLHttpRequest'
+        or request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+    ):
+        # ✅ Return JSON response (Python-side "prevent redirect")
+        return JsonResponse({
+            'liked': liked,
+            'total_likes': recipe.likes.count(),
+        })
+
+    # ✅ Normal fallback if JavaScript is disabled
+    return redirect('/')
+
+# ===============================
+# AUTHENTICATION
+# ===============================
 def signup(request):
     error_message = ''
     if request.method == "POST":
@@ -97,8 +134,9 @@ def signup(request):
             user = form.save()
             login(request, user)
             return redirect("/")
+        else:
+            error_message = 'Invalid sign up - try again!'
     else:
-        error_message = 'Invalid sign up - try again!'
-    form = UserCreationForm()
-        
+        form = UserCreationForm()
+
     return render(request, "registration/signup.html", {'form': form, 'error_message': error_message})

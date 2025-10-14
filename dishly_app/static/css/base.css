@@ -434,3 +434,143 @@ body {
     transform: translateY(0);
   }
 }
+/* === LIKE BUTTON === */
+.like-btn {
+  background: #ffe7cf;
+  color: #d86b34;
+  border: 2px solid #ffd6ad;
+  border-radius: 10px;
+  padding: 8px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.like-btn:hover {
+  background: #ff914d;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.like-btn.liked {
+  background: #ffb38a;
+  color: #fff;
+  border-color: #ff914d;
+}
+
+.like-btn.clicked {
+  transform: scale(0.9);
+}
+/* =========================
+   Dishly Theme Overrides
+   Paste at the END of base.css
+========================= */
+
+/* Palette variables for consistency */
+:root{
+  --bg-grad-1:#fff8f3;
+  --bg-grad-2:#ffe9d2;
+  --cream:#fffdf8;
+  --soft-cream:#fffaf5;
+  --brand:#ff914d;
+  --brand-700:#ff7a1f;
+  --brand-200:#ffe0bb;
+  --brand-250:#ffe7cf;
+  --brand-300:#ffd6ad;
+  --brand-400:#ffb38a;
+  --brown:#6e3a07;
+  --accent:#d86b34;
+  --divider:#f5d0a9;
+  --shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Global background + text (just in case) */
+body{
+  background:linear-gradient(135deg,var(--bg-grad-1),var(--bg-grad-2));
+  color:#2b2b2b;
+}
+
+/* Navbar & footer consistency */
+.navbar{background:var(--cream); box-shadow:var(--shadow); border-bottom:2px solid var(--divider);}
+.footer{background:var(--cream); border-top:2px solid var(--divider);}
+.logo{color:var(--accent);}
+.nav-links a{color:var(--brown);}
+.nav-links a:hover{color:var(--brand);}
+
+/* Cards / recipe showcase */
+.recipe-showcase{background:var(--cream); box-shadow:0 8px 24px rgba(0,0,0,0.08);}
+.showcase-image{background:linear-gradient(145deg,#fff5eb,#ffe2c2);}
+.showcase-content h2{color:var(--accent);}
+.ingredients{background:#fff3e4; border-left:5px solid var(--brand);}
+.description{color:#444;}
+
+/* Search bar */
+.search-bar{background:var(--cream); box-shadow:var(--shadow);}
+.search-input{
+  border:2px solid var(--brand-300);
+  background:var(--soft-cream);
+  color:var(--brown);
+}
+.search-input:focus{
+  border-color:var(--brand);
+  box-shadow:0 0 6px rgba(255,145,77,0.4);
+}
+.search-btn{
+  background:var(--brand);
+  color:#fff;
+}
+.search-btn:hover{background:var(--brand-700);}
+
+/* Primary / secondary buttons */
+.primary{background:var(--brand) !important; color:#fff !important;}
+.secondary{background:var(--brand-200) !important; color:#4b2a07 !important;}
+.recipe-actions .btn{box-shadow:0 3px 10px rgba(0,0,0,0.1);}
+.recipe-actions .btn:hover{transform:translateY(-2px); opacity:.9;}
+
+/* =========================
+   LIKE button theming
+========================= */
+.like-wrap{display:flex; align-items:center; gap:10px;}
+.like-count{font-weight:700; color:var(--brown);}
+
+.like-btn{
+  background:var(--brand-250);
+  color:var(--accent);
+  border:2px solid var(--brand-300);
+  border-radius:12px;
+  padding:10px 18px;
+  font-weight:700;
+  cursor:pointer;
+  transition:all .25s ease;
+  box-shadow:0 3px 8px rgba(0,0,0,0.1);
+  position:relative;
+  overflow:hidden;
+}
+.like-btn:hover{
+  background:var(--brand);
+  color:#fff;
+  transform:translateY(-2px);
+}
+.like-btn.liked{
+  background:var(--brand-400);
+  color:#fff;
+  border-color:var(--brand);
+}
+.like-btn.clicked{transform:scale(.92);}
+
+/* Heart pulse (brand-match) */
+.heart-pulse{
+  position:absolute; left:50%; top:50%;
+  width:12px; height:12px;
+  background:#ff5a3c; /* subtle deeper orange-red for pop */
+  border-radius:50%;
+  transform:translate(-50%,-50%) scale(0);
+  animation:pulseOut .8s ease-out forwards;
+  pointer-events:none;
+}
+@keyframes pulseOut{
+  0%{opacity:1; transform:translate(-50%,-50%) scale(0);}
+  50%{opacity:.7; transform:translate(-50%,-50%) scale(2.5);}
+  100%{opacity:0; transform:translate(-50%,-50%) scale(3.5);}
+}

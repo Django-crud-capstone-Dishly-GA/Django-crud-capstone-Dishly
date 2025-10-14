@@ -24,7 +24,7 @@
       {% if user.is_authenticated %}
       
         <li><a href="{% url "myrecipe" %}">My Recipes</a></li>
-        <li><a href="#">Favorites</a></li>
+      
        
      
      
@@ -56,6 +56,59 @@
   <footer class="footer">
     <p>© 2025 Dishly | Built by Hungry Team 😎🔥</p>
   </footer>
+<!-- LIKE SYSTEM JS -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const likeForms = document.querySelectorAll(".like-form");
 
+  likeForms.forEach(form => {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault(); // ✅ stop form from reloading the page
+
+      const recipeId = form.dataset.recipeId;
+      const csrftoken = form.querySelector("[name=csrfmiddlewaretoken]").value;
+      const button = form.querySelector("button");
+      const likeCount = form.querySelector(".like-count");
+
+      // small visual feedback
+      button.disabled = true;
+      button.classList.add("clicked");
+      setTimeout(() => button.classList.remove("clicked"), 200);
+
+      try {
+        const response = await fetch(/recipes/${recipeId}/like/, {
+          method: "POST",
+          headers: {
+            "X-CSRFToken": csrftoken,
+            "X-Requested-With": "XMLHttpRequest",  // 👈 important so Django returns JSON
+            "Accept": "application/json"
+          }
+        });
+
+        if (!response.ok) throw new Error("Network issue");
+        const data = await response.json();
+
+        // ✅ Update like count & button instantly
+        likeCount.textContent = data.total_likes;
+        if (data.liked) {
+          button.textContent = "💔 Unlike";
+          button.classList.remove("btn-primary");
+          button.classList.add("btn-danger");
+        } else {
+          button.textContent = "👍 Like";
+          button.classList.remove("btn-danger");
+          button.classList.add("btn-primary");
+        }
+
+      } catch (error) {
+        console.error("Error liking recipe:", error);
+      } finally {
+        button.disabled = false;
+      }
+    });
+  });
+});
+
+</script>
 </body>
 </html>
