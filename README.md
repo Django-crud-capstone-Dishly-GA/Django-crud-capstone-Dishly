@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/87e18d84-9058-4a58-bdbc-be8c9c701793" width="300" alt="Dishly Logo">
+  <img src="https://github.com/user-attachments/assets/87e18d84-9058-4a58-bdbc-be8c9c701793" width="400" alt="Dishly Logo">
 </p>
 
 <h1 align="center">🍳 Dishly — Django CRUD Capstone</h1>
@@ -10,7 +10,6 @@
 </p>
 
 ---
-
 
 Dishly is a personal recipe manager built with Django. Authenticated users can create, view, edit, and delete recipes, mark favorites/likes, and quickly filter recipes using a live search bar.  
 The UI uses a clean, warm palette and a responsive layout.
