@@ -1,5 +1,19 @@
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/87e18d84-9058-4a58-bdbc-be8c9c701793" width="400" alt="Dishly Logo">
+  <img 
+    src="https://github.com/user-attachments/assets/87e18d84-9058-4a58-bdbc-be8c9c701793"
+    alt="Dishly Logo"
+    width="300"
+    style="
+      border-radius: 20px;
+      background: linear-gradient(135deg, #fff8f3, #ffe9d2);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      padding: 20px;
+      margin: 10px 0;
+      transition: all 0.3s ease-in-out;
+    "
+    onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.3)';"
+    onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.25)';"
+  >
 </p>
 
 <h1 align="center">🍳 Dishly — Django CRUD Capstone</h1>
