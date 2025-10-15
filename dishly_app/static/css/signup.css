@@ -14,32 +14,37 @@
 .dishly-register-card {
   background: #fffdf8;
   border: 2px solid #f5d0a9;
-  border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   width: 100%;
-  max-width: 500px;
-  padding: 45px 35px;
+  max-width: 480px;
+  padding: 50px 40px;
   text-align: center;
   animation: fadeIn 0.7s ease;
 }
 
 .dishly-register-title {
   color: #d86b34;
-  font-size: 2em;
-  margin-bottom: 10px;
+  font-size: 2.1em;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .dishly-register-subtitle {
   color: #6e3a07;
-  font-size: 1em;
-  margin-bottom: 25px;
+  font-size: 1.05em;
+  margin-bottom: 30px;
+  line-height: 1.5;
 }
 
 /* === FORM === */
 .dishly-register-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 22px;
   text-align: left;
 }
 
@@ -47,51 +52,52 @@
 .dishly-form-field {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 7px;
 }
 
 .dishly-form-field label {
   font-weight: 600;
   color: #6e3a07;
-  font-size: 0.95em;
+  font-size: 1em;
 }
 
 .dishly-form-field input,
 .dishly-form-field select {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid #f0cda7;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1.8px solid #f0cda7;
   background: #fff;
   font-family: inherit;
-  font-size: 1em;
+  font-size: 1.05em;
   color: #2b2b2b;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: all 0.25s ease;
 }
 
 .dishly-form-field input:focus,
 .dishly-form-field select:focus {
   border-color: #ff914d;
-  box-shadow: 0 0 0 3px rgba(255, 145, 77, 0.2);
+  box-shadow: 0 0 6px rgba(255, 145, 77, 0.25);
   outline: none;
 }
 
 /* === BUTTON === */
 .dishly-btn.dishly-register-btn {
-  background: #ff914d;
+  background: linear-gradient(90deg, #ff914d, #ffa75c);
   color: #fff;
   border: none;
-  border-radius: 10px;
-  padding: 12px 20px;
+  border-radius: 12px;
+  padding: 14px 22px;
   font-weight: 600;
+  font-size: 1.05em;
   cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  margin-top: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 15px;
 }
 
 .dishly-btn.dishly-register-btn:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
+  transform: scale(1.04);
+  box-shadow: 0 4px 14px rgba(255, 145, 77, 0.25);
 }
 
 /* === ERROR STYLES === */
@@ -99,7 +105,7 @@
   background: #ffe5e5;
   border: 1px solid #ff4d4d;
   border-radius: 10px;
-  padding: 10px 14px;
+  padding: 12px 14px;
   margin-bottom: 15px;
   color: #b20000;
   text-align: left;
@@ -115,13 +121,14 @@
 .dishly-errorlist li {
   color: #d60000;
   font-size: 0.9em;
+  margin-top: -2px;
 }
 
 /* === ERROR FIELD BORDER === */
 .dishly-form-field input.is-invalid,
 .dishly-form-field select.is-invalid {
   border-color: #ff4d4d !important;
-  box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.2);
+  box-shadow: 0 0 6px rgba(255, 77, 77, 0.25);
 }
 
 /* === FOOTER === */
@@ -143,17 +150,29 @@
 
 /* === ANIMATION === */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* === RESPONSIVE === */
-@media (max-width: 500px) {
+@media (max-width: 480px) {
   .dishly-register-card {
-    padding: 30px 20px;
+    padding: 35px 25px;
   }
 
   .dishly-register-title {
-    font-size: 1.7em;
+    font-size: 1.8em;
+  }
+
+  .dishly-form-field input {
+    font-size: 1em;
+    padding: 12px 14px;
   }
 }

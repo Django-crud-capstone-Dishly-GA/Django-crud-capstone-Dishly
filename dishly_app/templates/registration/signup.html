@@ -12,6 +12,9 @@
     <p class="dishly-register-subtitle">
       Become part of the Dishly creator community — share your recipes, inspire others, and cook up greatness! 🍴🔥
     </p>
+    {% if form.errors %}
+    <p class="dishly-register-error-msg">Invalid sign up — please check your details.</p>
+    {% endif %}
 
     {# --- NON-FIELD ERRORS (e.g. password mismatch) --- #}
     {% if form.non_field_errors %}

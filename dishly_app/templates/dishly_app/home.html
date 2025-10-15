@@ -57,7 +57,7 @@
           <p><span class="like-count">{{ recipe.total_likes }}</span> Likes</p>
         </form>
       {% else %}
-        <p><a href="{% url 'login' %}">Log in</a> to like this recipe.</p>
+        <p><a href="{% url 'login' %}"><button class="btn login">Login</button></a> to like this recipe.</p>
       {% endif %}
 
       <div class="recipe-actions">
@@ -72,6 +72,34 @@
 <p class="text-center">No recipes available yet.</p>
 {% endfor %}
 
+<script>
+  // we added this script to make the search bar interactive and more fun to use
+const searchInput = document.querySelector('.search-input');
+const searchForm = document.querySelector('.search-bar');
+const recipeSections = document.querySelectorAll('.recipe-showcase');
+const noResultsMsg = document.querySelector('.no-results-msg');
 
+
+
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase().trim();
+
+  recipeSections.forEach(section => {
+    const title = section.querySelector('h2').textContent.toLowerCase();
+    section.style.display = title.includes(query) || query === "" ? "" : "none";
+  });
+});
+
+
+searchForm.addEventListener('submit', (e) => {
+  if (!searchInput.value.trim()) {
+    e.preventDefault();
+    return;
+  }
+
+  const anyVisible = [...recipeSections].some(s => s.style.display !== 'none');
+
+});
+</script>
 
 {% endblock %}

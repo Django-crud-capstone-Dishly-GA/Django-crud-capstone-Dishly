@@ -134,9 +134,12 @@ def signup(request):
             user = form.save()
             login(request, user)
             return redirect("/")
-        else:
-            error_message = 'Invalid sign up - try again!'
+        # keep form with its own errors
+        error_message = ''  
     else:
         form = UserCreationForm()
 
-    return render(request, "registration/signup.html", {'form': form, 'error_message': error_message})
+    return render(request, "registration/signup.html", {
+        'form': form,
+        'error_message': error_message,
+    })
