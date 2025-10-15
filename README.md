@@ -2,7 +2,7 @@
   <img
     src="https://github.com/user-attachments/assets/87e18d84-9058-4a58-bdbc-be8c9c701793"
     alt="Dishly Logo"
-    width="300"
+    width="350"
     style="
       border-radius: 20px;
       background: linear-gradient(135deg, #fff8f3, #ffe9d2);
@@ -28,17 +28,14 @@
 Dishly is a personal recipe manager built with Django. Authenticated users can create, view, edit, and delete recipes, mark likes, and quickly filter recipes using a live search bar.
 The UI uses a clean, warm palette and a responsive layout.
 
-> **Status:** ✅ Capstone MVP Complete — CRUD, auth, search, “My Recipes”, and likes.
-> 🛠️ Ongoing polish: AJAX like button (no full reload), image placeholders, and responsive styling.
-
 ---
 
-## 🧑‍🍳 **Team Description**
+## 🧑‍🍳 Team Description
 
 We’re not just building websites — we’re cooking up greatness.
 Because we’re **Hungry to be the Best** — and second place isn’t on the menu. 😎🔥
 
-### 👨‍👩‍👧‍👦 **Hungry Team Members:**
+### 👨‍👩‍👧‍👦 Hungry Team Members
 
 * **Alaa AlTaher**
 * **Abdulrhman Yaghi**
@@ -47,7 +44,7 @@ Because we’re **Hungry to be the Best** — and second place isn’t on the me
 
 ---
 
-## 📚 **Table of Contents**
+## 📚 Table of Contents
 
 1. [Overview](#overview)
 2. [Tech Stack](#tech-stack)
@@ -55,7 +52,7 @@ Because we’re **Hungry to be the Best** — and second place isn’t on the me
 4. [Installation & Setup](#installation--setup)
 5. [Features](#features)
 6. [User Stories](#user-stories)
-7. [Routing (URLs)](#routing-urls)
+7. [Routing (URL Names)](#routing-url-names)
 8. [Templates & Frontend](#templates--frontend)
 9. [Unit Tests](#unit-tests)
 10. [Challenges & Solutions](#challenges--solutions)
@@ -65,7 +62,7 @@ Because we’re **Hungry to be the Best** — and second place isn’t on the me
 
 ---
 
-## 📾 **Overview**
+## 🧾 Overview
 
 Dishly is a Django web app that lets users:
 
@@ -80,46 +77,55 @@ Dishly is a Django web app that lets users:
 
 ---
 
-## ⚙️ **Tech Stack**
+## ⚙️ Tech Stack
 
 | Layer              | Technologies                                       |
 | ------------------ | -------------------------------------------------- |
 | **Backend**        | Python 3.13, Django 5.x                            |
-| **Database**       | SQLite (dev) / PostgreSQL (optional)               |
+| **Database**       | SQLite (dev)                                       |
 | **Auth**           | Django built-in Auth (LoginView, UserCreationForm) |
 | **Frontend**       | Django Templates, Custom CSS, Vanilla JS           |
 | **Static & Media** | Django `staticfiles`, local image uploads          |
-| **Testing**        | Python `unittest`, Django TestCase                 |
+| **Testing**        | Django `TestCase` / `Client` (unittest style)      |
 
 ---
 
-## 🗂️ **Data Model (ERD)**
+## 🗂️ Data Model (ERD)
+
+> **models and relations**.
 
 ```
-User (django.contrib.auth.User)
- └── (1-to-Many) Recipe.user
+User (django.contrib.auth.models.User)
+  ├─< Recipe.user (FK)
+  └─<> Recipe.likes (M2M)
+
+Ingredient
+  └─<> Recipe.ingredients (M2M)
 
 Recipe
  - id (PK)
- - user (FK → User)
- - title (Char)
- - description (Text)
- - ingredients (Text)
- - steps (Text)
- - image (ImageField)
- - created_at (DateTime)
- - updated_at (DateTime)
-
- Like
- - id (PK)
- - user (FK → User)
- - recipe (FK → Recipe)
- - Unique(user, recipe)
+ - user (FK → User, required)
+ - name (CharField)
+ - description (TextField)
+ - category (CharField)
+ - image_url (URLField or ImageField, optional over commits)
+ - created_at (DateTime, often auto_add)
+ - updated_at (DateTime, often auto_now)
+ - likes (ManyToManyField → User, blank=True)
+ - ingredients (ManyToManyField → Ingredient, optional)
 ```
+
+**Relations**
+
+* A **User** can create many **Recipes** (`ForeignKey`).
+* A **User** can **like** many recipes, and a **Recipe** can be liked by many users (`ManyToMany`).
+* A **Recipe** can reference many **Ingredients** (and each **Ingredient** can belong to many recipes) via `ManyToMany`.
+
+> Notes from repo history: migrations include an `Ingredient` model (introduced around `0003`), an `image_url` evolution (`0004/0005`), and `likes` added on `0006`.
 
 ---
 
-## 🧮 **Installation & Setup**
+## 🧰 Installation & Setup
 
 ### 1️⃣ Clone
 
@@ -132,7 +138,6 @@ cd Django-crud-capstone-Dishly
 
 ```bash
 python -m venv .venv
-# Activate it
 # macOS/Linux
 source .venv/bin/activate
 # Windows
@@ -168,23 +173,23 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Visit 🔗 [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+Visit 👉 [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
 ---
 
-## 🌟 **Features**
+## 🌟 Features
 
 ✅ **Authentication** – Signup, Login, Logout
 ✅ **Recipes CRUD** – Create, Read, Update, Delete
 ✅ **My Recipes** – View recipes created by the logged-in user
 ✅ **Likes** – Toggle like per recipe
-✅ **Search** – Real-time client-side filtering
+✅ **Search** – Client-side filtering (JS script on home page)
 ✅ **Responsive Styling** – Warm color palette, clean UI
-✅ **Unit Tests Added** – Signup flow, recipe CRUD logic, and view access checks
+✅ **Unit Tests** – Signup flow, CRUD permissions, URL resolution, list/detail views
 
 ---
 
-## 🧩 **User Stories**
+## 🧩 User Stories
 
 1. As a visitor, I can browse public recipes.
 2. As a user, I can sign up, log in, and log out.
@@ -192,93 +197,91 @@ Visit 🔗 [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 4. As a user, I can like recipes.
 5. As a user, I can search for recipes instantly.
 6. As a user, I can view my own recipes easily.
-7. As a developer, I can run automated unit tests to verify functionality.
+7. As a developer, I can run automated tests to verify core flows.
 
 ---
 
-## 🌐 **Routing (URLs)**
+## 🌐 Routing (URL Names)
 
-| Path                              | Description         | Name            |
-| --------------------------------- | ------------------- | --------------- |
-| `/`                               | Home / Recipe List  | `recipe-list`   |
-| `/recipes/<int:pk>/`              | Recipe Details      | `recipe-detail` |
-| `/recipes/create/`                | Create Recipe       | `recipe-create` |
-| `/recipes/<int:pk>/edit/`         | Update Recipe       | `recipe-update` |
-| `/recipes/<int:pk>/delete/`       | Delete Recipe       | `recipe-delete` |
-| `/my-recipes/`                    | User’s Own Recipes  | `my-recipes`    |
-| `/like/<int:recipe_id>/toggle/`   | Toggle Like         | `like-toggle`   |
-| `/login/`, `/logout/`, `/signup/` | Auth Views          | —               |
-| `/tests/`                         | Unit Test Directory | Local execution |
+> Taken from `dishly_app/tests/test_urls.py` and views.
 
----
-
-## 🎨 **Templates & Frontend**
-
-| Template                     | Purpose                                  |
-| ---------------------------- | ---------------------------------------- |
-| `base.html`                  | Navbar, structure, blocks                |
-| `home.html`                  | Recipe cards, live search                |
-| `details.html`               | Recipe details, ingredients, like button |
-| `myrecipe.html`              | User’s recipes list                      |
-| `recipe_form.html`           | Create / Edit form                       |
-| `recipe_confirm_delete.html` | Delete confirmation                      |
-| `CSS`                        | Custom warm palette, responsive design   |
+| URL **name**    | Purpose                                    |
+| --------------- | ------------------------------------------ |
+| `recipe-list`   | Home / recipe list                         |
+| `recipe-detail` | Recipe details (expects `pk`)              |
+| `recipe-create` | Create a recipe                            |
+| `recipe-update` | Update a recipe (expects `pk`)             |
+| `recipe-delete` | Delete a recipe (expects `pk`)             |
+| `myrecipe`      | Logged-in user’s recipes page              |
+| `like-recipe`   | Like/Unlike a recipe (expects `recipe_id`) |
+| `signup`        | Registration page                          |
 
 ---
 
-## 🔧 **Unit Tests**
+## 🎨 Templates & Frontend
 
-Automated tests were added to validate Dishly’s core features.
+Repo paths:
 
-### **Structure:**
+| File                                            | Purpose                                                                                   |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `dishly_app/templates/dishly_app/home.html`     | Recipe cards, search input, like/login UI; includes client-side filtering script          |
+| `dishly_app/templates/registration/signup.html` | Signup form; now shows an inline error message on invalid entries                         |
+| Other templates                                 | `recipe_form.html`, `recipe_confirm_delete.html`, details, etc.                           |
+| CSS                                             | Example: `dishly_app/static/css/signup.css` (polish/spacing/animation updated 2025-10-15) |
+
+---
+
+## 🔧 Unit Tests
+
+Added **2025-10-15**:
 
 ```
-dishly_app/tests/
-├─ test_signup.py
-├─ test_crud_permissions.py
-├─ test_urls.py
-├─ test_views_list_detail.py
-└─ __init__.py
+dishly_app/
+└─ tests/
+   ├─ __init__.py
+   ├─ test_crud_permissions.py
+   ├─ test_signup.py
+   ├─ test_urls.py
+   └─ test_views_list_detail.py
 ```
 
-### **Included Tests:**
+**Coverage**
 
-| File                        | Test Purpose                                                                  |
-| --------------------------- | ----------------------------------------------------------------------------- |
-| `test_signup.py`            | Ensures user registration flow works properly and catches password mismatches |
-| `test_recipe_crud.py`       | Verifies CRUD functionality for recipes (create, edit, delete)                |
-| `test_views.py` *(planned)* | Will test list/detail views access and templates rendering correctness        |
+* `test_signup.py` — page loads, success flow, password mismatch shows **“Invalid sign up — please check your details.”**
+* `test_crud_permissions.py` — owner vs non-owner update/delete behavior; create requires login
+* `test_urls.py` — named URL reversing & resolving
+* `test_views_list_detail.py` — list & detail render a seeded recipe and return 200
 
-### **Run Tests:**
+Run:
 
 ```bash
 python manage.py test
 ```
 
-✅ Tests include validation of signup errors, recipe creation, and form rendering integrity.
+---
+
+## 💡 Challenges & Solutions
+
+| Challenge                                     | Solution                                                                           |
+| --------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Signup tests failed due to missing error text | Added inline error message to `registration/signup.html` when `form.errors` exists |
+| NoReverseMatch / URL mismatches               | Standardized URL names in tests and views                                          |
+| Like button UX for anonymous users            | Show Login button in `home.html` when not authenticated                            |
+| Style polish / responsiveness                 | `static/css/signup.css` refined (radius, animation, inputs)                        |
 
 ---
 
-## 💡 **Challenges & Solutions**
+## 🧾 Changelog
 
-| Challenge                         | Solution                                                 |
-| --------------------------------- | -------------------------------------------------------- |
-| **NoReverseMatch errors**         | Matched URL names consistently.                          |
-| **Redirect issues with `?next=`** | Used `login_required` + redirects to home.               |
-| **Like button reloading**         | Added `event.preventDefault()` and AJAX toggle.          |
-| **Unit test validation mismatch** | Updated HTML message assertions and form error handling. |
+### 🛠️ 2025-10-15 — Unit Tests & UI Polish
 
----
+* Added tests under `dishly_app/tests/`
+* Signup template shows invalid message when errors exist
+* Home page: login prompt next to like; client-side search polish
+* CSS: `static/css/signup.css` improved
+* Commit: [`16fb518`](https://github.com/Django-crud-capstone-Dishly-GA/Django-crud-capstone-Dishly/commit/16fb51870279b81ca1143009e196c79015039687)
 
-## 🗳️ **Changelog**
-
-### 🛠️ [2025-10-15] Unit Testing Integration
-
-* Added `test_signup.py` and `test_recipe_crud.py`
-* Fixed validation messages in signup page
-* Minor UI polishing for home page and buttons
-
-### 🎉 [2025-10-14] MVP Release
+### 🎉 2025-10-14 — MVP Release
 
 * CRUD functionality completed
 * Authentication & user recipes added
@@ -287,22 +290,26 @@ python manage.py test
 
 ---
 
-## 🤝 **Contributing**
+## 🤝 Contributing
 
-1. Create a new branch for your feature:
+1. Create a new branch:
 
    ```bash
    git checkout -b feat/your-feature
    ```
-2. Follow commit convention:
+2. Conventional commits:
 
    ```
-   feat(scope): message
+   feat(scope): short message
    ```
-3. Test before pushing.
+3. Run tests before pushing:
+
+   ```bash
+   python manage.py test
+   ```
 
 ---
 
-## 📜 **License**
+## 📜 License
 
-MIT © 2025 **Hungry Team** (GA Jordan – Group 4)
+MIT © 2025 **Hungry Team** (General Assembly Jordan – Group 4)
