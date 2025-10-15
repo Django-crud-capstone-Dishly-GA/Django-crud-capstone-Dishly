@@ -1,5 +1,5 @@
 <p align="center">
-  <img 
+  <img
     src="https://github.com/user-attachments/assets/87e18d84-9058-4a58-bdbc-be8c9c701793"
     alt="Dishly Logo"
     width="300"
@@ -25,24 +25,25 @@
 
 ---
 
-Dishly is a personal recipe manager built with Django. Authenticated users can create, view, edit, and delete recipes, mark favorites/likes, and quickly filter recipes using a live search bar.  
+Dishly is a personal recipe manager built with Django. Authenticated users can create, view, edit, and delete recipes, mark likes, and quickly filter recipes using a live search bar.
 The UI uses a clean, warm palette and a responsive layout.
 
-> **Status:** ✅ Capstone MVP Complete — CRUD, auth, search, “My Recipes”, and likes.  
+> **Status:** ✅ Capstone MVP Complete — CRUD, auth, search, “My Recipes”, and likes.
 > 🛠️ Ongoing polish: AJAX like button (no full reload), image placeholders, and responsive styling.
 
 ---
 
 ## 🧑‍🍳 **Team Description**
 
-We’re not just building websites — we’re cooking up greatness.  
+We’re not just building websites — we’re cooking up greatness.
 Because we’re **Hungry to be the Best** — and second place isn’t on the menu. 😎🔥
 
 ### 👨‍👩‍👧‍👦 **Hungry Team Members:**
-- **Alaa AlTaher**
-- **Abdulrhman Yaghi**
-- **Abdelrazzaq Asfour**
-- **Abdullah Faouri**
+
+* **Alaa AlTaher**
+* **Abdulrhman Yaghi**
+* **Abdelrazzaq Asfour**
+* **Abdullah Faouri**
 
 ---
 
@@ -56,23 +57,24 @@ Because we’re **Hungry to be the Best** — and second place isn’t on the me
 6. [User Stories](#user-stories)
 7. [Routing (URLs)](#routing-urls)
 8. [Templates & Frontend](#templates--frontend)
-9. [Challenges & Solutions](#challenges--solutions)
-10. [Changelog](#changelog)
-11. [Contributing](#contributing)
-12. [License](#license)
+9. [Unit Tests](#unit-tests)
+10. [Challenges & Solutions](#challenges--solutions)
+11. [Changelog](#changelog)
+12. [Contributing](#contributing)
+13. [License](#license)
 
 ---
 
-## 🧾 **Overview**
+## 📾 **Overview**
 
 Dishly is a Django web app that lets users:
 
-- Register / log in / log out  
-- Create, read, update, and delete recipes  
-- View their own recipes on **My Recipes**  
-- Like/favorite recipes  
-- Use a **live search bar** that filters results dynamically  
-- View recipe details with ingredients, steps, and actions  
+* Register / log in / log out
+* Create, read, update, and delete recipes
+* View their own recipes on **My Recipes**
+* Like recipes
+* Use a **live search bar** that filters results dynamically
+* View recipe details with ingredients, steps, and actions
 
 🎯 **Goal:** A simple, pleasant recipe notebook that showcases Django CRUD best practices and a clean user experience.
 
@@ -80,13 +82,14 @@ Dishly is a Django web app that lets users:
 
 ## ⚙️ **Tech Stack**
 
-| Layer | Technologies |
-|-------|---------------|
-| **Backend** | Python 3.13, Django 5.x |
-| **Database** | SQLite (dev) / PostgreSQL (optional) |
-| **Auth** | Django built-in Auth (LoginView, UserCreationForm) |
-| **Frontend** | Django Templates, Custom CSS, Vanilla JS |
-| **Static & Media** | Django `staticfiles`, local image uploads |
+| Layer              | Technologies                                       |
+| ------------------ | -------------------------------------------------- |
+| **Backend**        | Python 3.13, Django 5.x                            |
+| **Database**       | SQLite (dev) / PostgreSQL (optional)               |
+| **Auth**           | Django built-in Auth (LoginView, UserCreationForm) |
+| **Frontend**       | Django Templates, Custom CSS, Vanilla JS           |
+| **Static & Media** | Django `staticfiles`, local image uploads          |
+| **Testing**        | Python `unittest`, Django TestCase                 |
 
 ---
 
@@ -107,7 +110,7 @@ Recipe
  - created_at (DateTime)
  - updated_at (DateTime)
 
-Favorite / Like
+ Like
  - id (PK)
  - user (FK → User)
  - recipe (FK → Recipe)
@@ -116,7 +119,7 @@ Favorite / Like
 
 ---
 
-## 🧰 **Installation & Setup**
+## 🧮 **Installation & Setup**
 
 ### 1️⃣ Clone
 
@@ -165,93 +168,134 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Visit 👉 [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+Visit 🔗 [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
 ---
 
 ## 🌟 **Features**
 
-✅ **Authentication** – Signup, Login, Logout  
-✅ **Recipes CRUD** – Create, Read, Update, Delete  
-✅ **My Recipes** – View recipes created by the logged-in user  
-✅ **Likes/Favorites** – Toggle like per recipe  
-✅ **Search** – Real-time client-side filtering  
-✅ **Responsive Styling** – Warm color palette, clean UI  
+✅ **Authentication** – Signup, Login, Logout
+✅ **Recipes CRUD** – Create, Read, Update, Delete
+✅ **My Recipes** – View recipes created by the logged-in user
+✅ **Likes** – Toggle like per recipe
+✅ **Search** – Real-time client-side filtering
+✅ **Responsive Styling** – Warm color palette, clean UI
+✅ **Unit Tests Added** – Signup flow, recipe CRUD logic, and view access checks
 
 ---
 
 ## 🧩 **User Stories**
 
-1. As a visitor, I can browse public recipes.  
-2. As a user, I can sign up, log in, and log out.  
-3. As a user, I can create and manage my recipes.  
-4. As a user, I can like recipes.  
-5. As a user, I can search for recipes instantly.  
+1. As a visitor, I can browse public recipes.
+2. As a user, I can sign up, log in, and log out.
+3. As a user, I can create and manage my recipes.
+4. As a user, I can like recipes.
+5. As a user, I can search for recipes instantly.
 6. As a user, I can view my own recipes easily.
+7. As a developer, I can run automated unit tests to verify functionality.
 
 ---
 
 ## 🌐 **Routing (URLs)**
 
-| Path | Description | Name |
-|------|--------------|------|
-| `/` | Home / Recipe List | `recipe-list` |
-| `/recipes/<int:pk>/` | Recipe Details | `recipe-detail` |
-| `/recipes/create/` | Create Recipe | `recipe-create` |
-| `/recipes/<int:pk>/edit/` | Update Recipe | `recipe-update` |
-| `/recipes/<int:pk>/delete/` | Delete Recipe | `recipe-delete` |
-| `/my-recipes/` | User’s Own Recipes | `my-recipes` |
-| `/like/<int:recipe_id>/toggle/` | Toggle Like | `like-toggle` |
-| `/login/`, `/logout/`, `/signup/` | Auth Views | — |
+| Path                              | Description         | Name            |
+| --------------------------------- | ------------------- | --------------- |
+| `/`                               | Home / Recipe List  | `recipe-list`   |
+| `/recipes/<int:pk>/`              | Recipe Details      | `recipe-detail` |
+| `/recipes/create/`                | Create Recipe       | `recipe-create` |
+| `/recipes/<int:pk>/edit/`         | Update Recipe       | `recipe-update` |
+| `/recipes/<int:pk>/delete/`       | Delete Recipe       | `recipe-delete` |
+| `/my-recipes/`                    | User’s Own Recipes  | `my-recipes`    |
+| `/like/<int:recipe_id>/toggle/`   | Toggle Like         | `like-toggle`   |
+| `/login/`, `/logout/`, `/signup/` | Auth Views          | —               |
+| `/tests/`                         | Unit Test Directory | Local execution |
 
 ---
 
 ## 🎨 **Templates & Frontend**
 
-| Template | Purpose |
-|-----------|----------|
-| `base.html` | Navbar, structure, blocks |
-| `home.html` | Recipe cards, live search |
-| `details.html` | Recipe details, ingredients, like button |
-| `myrecipe.html` | User’s recipes list |
-| `recipe_form.html` | Create / Edit form |
-| `recipe_confirm_delete.html` | Delete confirmation |
-| `CSS` | Custom warm palette, responsive design |
+| Template                     | Purpose                                  |
+| ---------------------------- | ---------------------------------------- |
+| `base.html`                  | Navbar, structure, blocks                |
+| `home.html`                  | Recipe cards, live search                |
+| `details.html`               | Recipe details, ingredients, like button |
+| `myrecipe.html`              | User’s recipes list                      |
+| `recipe_form.html`           | Create / Edit form                       |
+| `recipe_confirm_delete.html` | Delete confirmation                      |
+| `CSS`                        | Custom warm palette, responsive design   |
+
+---
+
+## 🔧 **Unit Tests**
+
+Automated tests were added to validate Dishly’s core features.
+
+### **Structure:**
+
+```
+dishly_app/tests/
+├─ test_signup.py
+├─ test_crud_permissions.py
+├─ test_urls.py
+├─ test_views_list_detail.py
+└─ __init__.py
+```
+
+### **Included Tests:**
+
+| File                        | Test Purpose                                                                  |
+| --------------------------- | ----------------------------------------------------------------------------- |
+| `test_signup.py`            | Ensures user registration flow works properly and catches password mismatches |
+| `test_recipe_crud.py`       | Verifies CRUD functionality for recipes (create, edit, delete)                |
+| `test_views.py` *(planned)* | Will test list/detail views access and templates rendering correctness        |
+
+### **Run Tests:**
+
+```bash
+python manage.py test
+```
+
+✅ Tests include validation of signup errors, recipe creation, and form rendering integrity.
 
 ---
 
 ## 💡 **Challenges & Solutions**
 
-| Challenge | Solution |
-|------------|-----------|
-| **NoReverseMatch errors** | Matched URL names consistently. |
-| **Redirect issues with `?next=`** | Used `login_required` + redirects to home. |
-| **Like button reloading** | Added `event.preventDefault()` and AJAX toggle. |
+| Challenge                         | Solution                                                 |
+| --------------------------------- | -------------------------------------------------------- |
+| **NoReverseMatch errors**         | Matched URL names consistently.                          |
+| **Redirect issues with `?next=`** | Used `login_required` + redirects to home.               |
+| **Like button reloading**         | Added `event.preventDefault()` and AJAX toggle.          |
+| **Unit test validation mismatch** | Updated HTML message assertions and form error handling. |
 
 ---
 
-## 🧾 **Changelog**
+## 🗳️ **Changelog**
 
-### 🧱 [Unreleased]
-- Improve AJAX like toggle  
-- Add pagination  
+### 🛠️ [2025-10-15] Unit Testing Integration
+
+* Added `test_signup.py` and `test_recipe_crud.py`
+* Fixed validation messages in signup page
+* Minor UI polishing for home page and buttons
 
 ### 🎉 [2025-10-14] MVP Release
-- Added CRUD functionality  
-- Added authentication  
-- Implemented My Recipes  
-- Styled UI  
-- Added Like system and live search  
+
+* CRUD functionality completed
+* Authentication & user recipes added
+* Likes & live search implemented
+* UI and CSS polish applied
 
 ---
 
 ## 🤝 **Contributing**
 
 1. Create a new branch for your feature:
+
    ```bash
    git checkout -b feat/your-feature
    ```
 2. Follow commit convention:
+
    ```
    feat(scope): message
    ```
