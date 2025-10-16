@@ -11,9 +11,7 @@ from .models import Recipe
 from .forms import RecipeForm
 
 
-# ===============================
-# STATIC PAGES
-# ===============================
+
 class Home(LoginView):
     template_name = ''
 
@@ -26,9 +24,7 @@ def contact(request):
     return render(request, 'contact.html')
 
 
-# ===============================
-# MAIN RECIPE VIEWS
-# ===============================
+
 class RecipleListView(ListView):
     model = Recipe
     template_name = 'dishly_app/home.html'
@@ -85,47 +81,40 @@ class RecipeDeleteView(LoginRequiredMixin, DeleteView):
         return redirect('/')
 
 
-# ===============================
-# USER RECIPES
-# ===============================
+
 @login_required(login_url=reverse_lazy('recipe-list'), redirect_field_name=None)
 def my_recipes(request):
     recipes = Recipe.objects.filter(user=request.user)
     return render(request, 'dishly_app/myrecipe.html', {'recipes': recipes})
 
 
-# ===============================
-# LIKE SYSTEM (AJAX)
-# ===============================
+
 @login_required
 def like_recipe(request, recipe_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     liked = False
 
-    # Toggle like/unlike
+
     if request.user in recipe.likes.all():
         recipe.likes.remove(request.user)
     else:
         recipe.likes.add(request.user)
         liked = True
 
-    # ✅ Detect AJAX requests (modern browsers)
+
     if (
         request.headers.get('x-requested-with') == 'XMLHttpRequest'
         or request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
     ):
-        # ✅ Return JSON response (Python-side "prevent redirect")
+  
         return JsonResponse({
             'liked': liked,
             'total_likes': recipe.likes.count(),
         })
 
-    # ✅ Normal fallback if JavaScript is disabled
     return redirect('/')
 
-# ===============================
-# AUTHENTICATION
-# ===============================
+
 def signup(request):
     error_message = ''
     if request.method == "POST":
@@ -134,7 +123,7 @@ def signup(request):
             user = form.save()
             login(request, user)
             return redirect("/")
-        # keep form with its own errors
+
         error_message = ''  
     else:
         form = UserCreationForm()
